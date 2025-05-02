@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 export const Navbar = () => {
   return (
-    <nav className="h-14 border-b">
+    <nav className="h-14 border-b pl-16">
       <div className="h-full container flex justify-between items-center">
         <h3 className="text-xl font-semibold tracking-tight">
           <Link href="/">Authy</Link>
@@ -21,7 +21,6 @@ export const Navbar = () => {
                     <Link href="/auth/signup">Sign Up</Link>
                 </Button>
             </li>
-
         </ul>
       </div>
     </nav>

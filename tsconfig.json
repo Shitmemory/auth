@@ -18,12 +18,19 @@
         "name": "next"
       }
     ],
-    "baseUrl": "src",  // Add this line
+    "baseUrl": "src",  // Path baseUrl for module resolution
     "paths": {
       "@components/*": ["app/components/*"],  // Path alias for components
       "@/*": ["./*"]  // Path alias for the root directory
-    }
+    },
+    "types": ["next-auth"]  // Add this line to include the next-auth types
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts", 
+    "**/*.ts", 
+    "**/*.tsx", 
+    ".next/types/**/*.ts", 
+    "next-auth.d.ts"  // Ensure next-auth.d.ts is included
+  ],
   "exclude": ["node_modules"]
 }
