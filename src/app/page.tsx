@@ -71,7 +71,7 @@ export default function HomePage() {
         </ul>
 
         <div className="my-2 h-1 bg-muted" />
-        <h2 className="text-2xl font-bold tracking-tight">Created With</h2>
+        <h2 className="text-2xl font-bold tracking-tight">Createdd With</h2>
 
         <ul className="mt-4 grid grid-cols-4 gap-2">
           <li className="p-2 shadow hover:bg-muted">Next.js</li>

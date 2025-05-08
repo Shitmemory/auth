@@ -3,14 +3,19 @@
 import { type SignupInput, SignupSchema } from "@/validators/signup-validator";
 import { useForm } from "react-hook-form";
 import { valibotResolver } from "@hookform/resolvers/valibot";
-
-
-
 import { signupUserAction } from "@/actions/signup-user-action";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { Button } from "@components/ui/button";
 
@@ -26,11 +31,11 @@ export const SignupForm = () => {
   const { handleSubmit, control, formState, setError } = form;
 
   const submit = async (values: SignupInput) => {
-    const res = await signupUserAction(values);
+    const res = await signupUserAction(values); // this is very powerful because i can use dot notation on this variable to access a wide range of data
 
     if (res.success) {
-     // router.push("/auth/signup/success");
-     console.log(values)
+      // router.push("/auth/signup/success");
+      setSuccess(true);
     } else {
       switch (res.statusCode) {
         case 400:
@@ -38,7 +43,7 @@ export const SignupForm = () => {
 
           for (const key in nestedErrors) {
             setError(key as keyof SignupInput, {
-            message: nestedErrors[key]?.[0], // this is really good it always has a message tied to it 
+              message: nestedErrors[key]?.[0], // this is really good it always has a message tied to it
             });
           }
           break;
@@ -53,7 +58,7 @@ export const SignupForm = () => {
   if (success) {
     return (
       <div>
-        <p>User successfully created!</p>
+        <p>User succesfully created!</p>
 
         <span>
           Click{" "}

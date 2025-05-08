@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { NavbarLinks } from "./navbar-links";
 // import { NavbarLinks } from "./navbar-links";
 
 export const Navbar = () => {
@@ -11,18 +12,13 @@ export const Navbar = () => {
         </h3>
 
         <ul className="flex items-center gap-x-4">
-            <li>
-                <Button variant="outline" size="sm" asChild>
-                    <Link href="/auth/signin">Sign In</Link>
-                </Button>
-            </li>
-            <li>
-                <Button variant="outline" size="sm" asChild>
-                    <Link href="/auth/signup">Sign Up</Link>
-                </Button>
-            </li>
+          <NavbarLinks />
         </ul>
       </div>
     </nav>
   );
 };
+
+// we want to display sign in sign up only when we are logged out
+// in next.js every component is a client component
+// i want the nav links to be client components

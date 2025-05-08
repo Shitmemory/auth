@@ -1,18 +1,18 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { valibotResolver } from "@hookform/resolvers/valibot";   
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage } from "@components/ui/form";
-
-
+  FormMessage,
+} from "@components/ui/form";
 import { type SigninInput, SigninSchema } from "@/validators/signin-validator";
 import { signinUserAction } from "@/actions/signin-user-action";
+import { redirect } from "next/navigation";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 
@@ -33,14 +33,13 @@ export const SigninForm = () => {
       switch (res.statusCode) {
         case 401:
           setError("password", { message: res.error });
-          break;
         case 500:
         default:
-          const error = res.error || "Internal Server Error";
+          const error = res.error || "Internal server error";
           setError("password", { message: error });
       }
-    } 
-  }; 
+    }
+  }; // <-- This is the missing closing brace for the `submit` function
 
   return (
     <Form {...form}>
@@ -92,3 +91,5 @@ export const SigninForm = () => {
     </Form>
   );
 };
+
+// go over how switch statements work
