@@ -5,6 +5,7 @@ import { SignupSchema } from "@/validators/signup-validator";
 import db from "@/drizzle";
 import { lower, users } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
+import { USER_ROLES } from "@/lib/constants";
 
 type Res =
   | { success: true }
@@ -41,6 +42,8 @@ export async function signupUserAction(values: unknown): Promise<Res> {
   try {
     // Todo hash password
     const hashPassword = await argon2.hash(password);
+    const isAdmin =
+      process.env.ADMIN_EMAIL_ADDRESS?.toLowerCase() === email.toLowerCase();
 
     const newUser = await db
       .insert(users)
@@ -48,6 +51,7 @@ export async function signupUserAction(values: unknown): Promise<Res> {
         name,
         email,
         password: hashPassword,
+        role: isAdmin ? USER_ROLES.ADMIN : USER_ROLES.USER, // created an enum for this
       })
       .returning({ id: users.id })
       .then((res) => res[0]);

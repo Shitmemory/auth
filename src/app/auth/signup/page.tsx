@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { SignupForm } from "./components/signup-form";
 import { Button } from "@components/ui/button";
+import {
+  OAuthSigninButtons,
+  OAuthSigninButtonsSkeleton,
+} from "@components/oauth-signin-buttons";
+import { Suspense } from "react";
 
 export default function SignupPage() {
   return (
@@ -12,6 +17,11 @@ export default function SignupPage() {
         <SignupForm />
 
         <div className="bg-muted h-1 my-4" />
+        <Suspense fallback={<OAuthSigninButtonsSkeleton signup />}>
+          {" "}
+          {/* Demo the loading skeleton  */}
+          <OAuthSigninButtons signup />
+        </Suspense>
         <p>
           Already have an account? Click
           <Button className="p-1" variant="link">

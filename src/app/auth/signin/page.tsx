@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { Button } from "@components/ui/button";
 import { SigninForm } from "./components/signin-form";
+import {
+  OAuthSigninButtons,
+  OAuthSigninButtonsSkeleton,
+} from "@components/oauth-signin-buttons";
+import { Suspense } from "react";
 
 export default function SigninPage() {
   return (
@@ -12,6 +17,11 @@ export default function SigninPage() {
         <SigninForm />
 
         <div className="bg-muted h-1 my-4" />
+        <Suspense fallback={<OAuthSigninButtonsSkeleton />}>
+          {" "}
+          {/* Demo the loading skeleton  */}
+          <OAuthSigninButtons />
+        </Suspense>
         <p>
           Don't have an account already? Click{" "}
           <Button variant="link" className="px-0">

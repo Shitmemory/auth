@@ -27,7 +27,7 @@ export const users = pgTable(
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
     name: text("name"),
-    email: text("email").unique(),
+    email: text("email").notNull().unique(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
     password: text("password"),
@@ -36,6 +36,21 @@ export const users = pgTable(
   (table) => ({
     emailUniqueIndex: uniqueIndex("emailUniqueIndex").on(lower(table.email)),
   }) // indexing it based on lowercase email
+);
+
+export const adminUserEmailAddresses = pgTable(
+  "adminUserEmailAddresses",
+  {
+    id: text("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`), // 🔥 DB generates UUID
+    email: text("email").notNull(),
+  },
+  (table) => ({
+    adminEmailUniqueIndex: uniqueIndex("adminEmailUniqueIndex").on(
+      lower(table.email)
+    ),
+  })
 );
 
 export const accounts = pgTable(

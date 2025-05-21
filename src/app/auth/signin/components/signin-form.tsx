@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@components/ui/form";
 import { type SigninInput, SigninSchema } from "@/validators/signin-validator";
-import { signinUserAction } from "@/actions/signin-user-action";
+import { SigninUserAction } from "@/actions/signin-user-action";
 import { redirect } from "next/navigation";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
@@ -25,7 +25,7 @@ export const SigninForm = () => {
   const { handleSubmit, control, formState, setError } = form;
 
   const submit = async (values: SigninInput) => {
-    const res = await signinUserAction(values);
+    const res = await SigninUserAction(values);
 
     if (res.success) {
       window.location.href = "/profile";

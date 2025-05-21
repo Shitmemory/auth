@@ -8,6 +8,20 @@
       "when": 1746169127252,
       "tag": "0000_powerful_doctor_spectrum",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1747653046405,
+      "tag": "0001_strong_madelyne_pryor",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1747656083546,
+      "tag": "0002_foamy_valkyrie",
+      "breakpoints": true
     }
   ]
 }
