@@ -19,7 +19,7 @@ export const ToggleEmailVerifiedInput = ({
 
   const clickHandler = async (email: string, isCurrentlyVerified: boolean) => {
     startTransition(() => {
-      await toggleEmailVerifiedAction(email, isCurrentlyVerified);
+      toggleEmailVerifiedAction(email, isCurrentlyVerified);
     });
   };
 
