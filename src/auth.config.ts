@@ -6,7 +6,7 @@ import { OAuthVerifyEmailAction } from "./actions/oauth-verify-email-action";
 import Google from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
 import { USER_ROLES } from "./lib/constants";
-import { changeUserRoleAction } from "./actions/change-user-role-action";
+// import { changeUserRoleAction } from "./actions/change-user-role-action";
 import type { AdapterUser } from "@auth/core/adapters";
 import { getTableColumns } from "drizzle-orm";
 import { findAdminUserEmailAddresses } from "./resources/admin-user-email-address-queries";
@@ -105,9 +105,9 @@ export const authConfig = {
 
       if (account?.provider === "credentials") {
         if (user.emailVerified) {
-          // return true
+          return true;
         }
-        return true;
+        // return true;
       } // before credential users had null for the emailVerified row and this fixes that problem
       return false;
     },

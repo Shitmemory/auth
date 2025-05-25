@@ -10,6 +10,7 @@ import {
   pgEnum,
   type AnyPgColumn,
   uniqueIndex,
+  serial,
 } from "drizzle-orm/pg-core";
 
 import type { AdapterAccountType } from "next-auth/adapters";
@@ -39,7 +40,7 @@ export const users = pgTable(
 );
 
 export const adminUserEmailAddresses = pgTable(
-  "adminUserEmailAddresses",
+  "adminUserEmailAddresses", // this table is for the founders of the company/ceos if you will
   {
     id: text("id")
       .primaryKey()
@@ -87,21 +88,12 @@ export const sessions = pgTable("session", {
   expires: timestamp("expires", { mode: "date" }).notNull(),
 });
 
-export const verificationTokens = pgTable(
-  "verificationToken",
-  {
-    identifier: text("identifier").notNull(),
-    token: text("token").notNull(),
-    expires: timestamp("expires", { mode: "date" }).notNull(),
-  },
-  (verificationToken) => [
-    {
-      compositePk: primaryKey({
-        columns: [verificationToken.identifier, verificationToken.token],
-      }),
-    },
-  ]
-);
+export const verificationTokens = pgTable("verificationToken", {
+  id: serial("id").primaryKey(), // ✅ Clean, auto-incrementing ID
+  identifier: text("identifier").notNull(),
+  token: text("token").notNull().unique(), // ✅ Ensure token is unique
+  expires: timestamp("expires", { mode: "date" }).notNull(),
+});
 
 export const authenticators = pgTable(
   "authenticator",

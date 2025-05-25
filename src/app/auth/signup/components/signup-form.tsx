@@ -31,11 +31,10 @@ export const SignupForm = () => {
   const { handleSubmit, control, formState, setError } = form;
 
   const submit = async (values: SignupInput) => {
-    const res = await signupUserAction(values); // this is very powerful because i can use dot notation on this variable to access a wide range of data
-
+    const res = await signupUserAction(values);
     if (res.success) {
-      // router.push("/auth/signup/success");
-      setSuccess(true);
+      router.push("/auth/signup/success"); // when the user signs up they will be taken to the success page instantly to verify the email
+      // setSuccess(true);
     } else {
       switch (res.statusCode) {
         case 400:
@@ -43,7 +42,7 @@ export const SignupForm = () => {
 
           for (const key in nestedErrors) {
             setError(key as keyof SignupInput, {
-              message: nestedErrors[key]?.[0], // this is really good it always has a message tied to it
+              message: nestedErrors[key]?.[0], // always has a message tied to it
             });
           }
           break;

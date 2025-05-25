@@ -15,11 +15,11 @@ export const ToggleEmailVerifiedInput = ({
   emailVerified,
   isAdmin,
 }: ToggleEmailVerifiedInputProps) => {
-  const [isPending, startTransaction] = useTransition(); // useTransition hook
+  const [isPending, startTransition] = useTransition(); // useTransition hook
 
   const clickHandler = async (email: string, isCurrentlyVerified: boolean) => {
-    startTransition(() => {
-      toggleEmailVerifiedAction(email, isCurrentlyVerified);
+    startTransition(async () => {
+      await toggleEmailVerifiedAction(email, isCurrentlyVerified);
     });
   };
 
@@ -34,3 +34,7 @@ export const ToggleEmailVerifiedInput = ({
     />
   );
 };
+
+// if clickHandler is async and toggleEmailVerifiedAction is inside it why do i need another async?
+// just becasue an async function wraps another function doesnt mean that the inner function is also async
+// the callback must be marked with async independently because its not running inside clickhandlers await context

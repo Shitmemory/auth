@@ -7,6 +7,8 @@ import { ArrowLeftSquareIcon } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { findAllUsers } from "@/resources/admin-get-users";
+import { ToggleEmailVerifiedInput } from "./components/toggle-email-verified-input";
+import { ChangeUserRoleInput } from "./components/change-user-role-input";
 
 export default async function Page() {
   const session = await auth();
@@ -64,9 +66,19 @@ export default async function Page() {
                 </td>
                 <td className="px-6 py-3">{user.email}</td>
                 <td className="px-6 py-3">
-                  {user.emailVerified ? "YES" : "NO"}
+                  <ToggleEmailVerifiedInput
+                    email={user.email}
+                    emailVerified={user.emailVerified}
+                    isAdmin={user.role === USER_ROLES.ADMIN}
+                  />
                 </td>
-                <td className="px-6 py-3 uppercase">{user.role}</td>
+                <td className="px-6 py-3 uppercase">
+                  <ChangeUserRoleInput
+                    email={user.email}
+                    currentRole={user.role}
+                    isAdmin={user.role === USER_ROLES.ADMIN}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>

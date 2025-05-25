@@ -8,6 +8,7 @@ import { UpdateUserInfoForm } from "./components/update-user-info-form";
 import { redirect } from "next/navigation";
 import { USER_ROLES } from "@/lib/constants";
 import { LockIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -78,6 +79,13 @@ const SignedIn = async ({ user }: { user: User }) => {
           <tr className="divide-x">
             <td className="px-6 py-3">{user.id}</td>
             <td className="px-6 py-3">{user.name || "NULL"}</td>
+            <td
+              className={cn("px-6 py-3", {
+                "opacity-50": user.name === null,
+              })}
+            >
+              {user.name ?? "NULL"}
+            </td>
             <td className="px-6 py-3">{user.email}</td>
             <td className="px-6 py-3 uppercase">{user.role}</td>
           </tr>
